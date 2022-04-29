@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_purchase_request_custom_iso" inherit_id="purchase_request.report_purchase_request">
+        <xpath expr="//div[hasclass('page')]//div[1]" position="after">
+            <div class="row mb-5">
+                <div class="offset-3 col-9">
+                    <table class="mb-5 ml-0 text-right">
+                        <tr>
+                            <td class="text-right mx-3 px-3">Código:
+                                <t t-esc="o.iso_document_code"/>
+                            </td>
+                            <td class="text-right mx-3 px-3">Fecha de revisión:
+                                <t t-esc="o.iso_document_date_revised"/>
+                            </td>
+                            <td class="text-right">Número de revisión:
+                                <t t-esc="o.iso_document_revision"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//h2" position="replace">
+            <div class="mb-5">
+                <h2>
+                    <span t-field="o.iso_document_name"/>
+                </h2>
+                <h3>
+                    <span t-field="o.name"/>
+                </h3>
+            </div>
+        </xpath>
+    </template>
+</odoo>

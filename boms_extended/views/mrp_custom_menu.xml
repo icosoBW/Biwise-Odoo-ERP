@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <menuitem id="mrp_bom_line_menu"
+            action="mrp_bom_line_action"
+            parent="mrp.menu_mrp_bom"
+            sequence="100"/>
+
+</odoo>

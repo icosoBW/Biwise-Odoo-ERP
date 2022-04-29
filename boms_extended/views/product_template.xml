@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_bom_button_custom" model="ir.ui.view">
+        <field name="name">product.template.procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="mrp.product_template_form_view_bom_button"/>
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_bom"/>
+                    <label for="is_bom"/>
+                </div>
+            </xpath>
+            <xpath expr="//button[hasclass('oe_stat_button')][8]" position="replace">
+                <button class="oe_stat_button" name="627" type="action" attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}" icon="fa-file-excel-o">
+                    <field string="BOM hijas" name="bom_count" widget="statinfo"/>
+                </button>
+            </xpath>
+            <xpath expr="//button[@name='action_used_in_bom']" position="replace">
+                <button class="oe_stat_button" name="action_used_in_bom" type="object" attrs="{'invisible':['|',('type', 'not in', ['product', 'consu']), ('used_in_bom_count', '=', 0)]}" icon="fa-file-excel-o">
+                    <field string="BOM padres" name="used_in_bom_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

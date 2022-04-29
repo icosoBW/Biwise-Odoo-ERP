@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_delivery_document_custom" inherit_id="stock.report_delivery_document">
+        <xpath expr="//t/t/t/t[3]" position="replace">
+            <div class="row mb-5">
+                <div class="offset-3 col-9">
+                    <table class="mb-5 ml-0 text-right">
+                        <tr>
+                            <td class="text-right mx-3 px-3">Código: <t t-esc="o.iso_document_code"/></td>
+                            <td class="text-right mx-3 px-3">Fecha de revisión: <t t-esc="o.iso_document_date_revised"/></td>
+                            <td class="text-right">Número de revisión: <t t-esc="o.iso_document_revision"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div name="address">
+                      <div style="font-size:14px">Dirección de entrega:</div>
+                        <div t-esc="partner" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True}"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <!--h2 might not be the current tag to locate name field-->
+        <xpath expr="//h2" position="replace">
+            <h1 class="my-3" style="color:#7e2115">
+                <span t-field="o.iso_document_name"/>
+            </h1>
+        </xpath>
+    </template>
+</odoo>

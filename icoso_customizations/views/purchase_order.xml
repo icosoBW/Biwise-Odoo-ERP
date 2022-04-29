@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_custom" model="ir.ui.view">
+        <field name="name">purchase.order.form.custom</field>
+        <!-- Aquí es importante colocar el id del modelo al que pertenece la vista.
+        Este se puede obtener, en modo desarrollador, al hacer clic en la catarina
+        y luego en Editar vista: Form / Tree / Kanban".
+        !-->
+        <field name="model">purchase.order</field>
+        <!-- Aquí es importante colocar el id de la vista a heredar en el atributo ref.
+        Este se puede obtener, en modo desarrollador, al hacer clic en la catarina
+        y luego en Editar vista: Form / Tree / Kanban".
+        !-->
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="doc_type" widget="radio"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_tree_custom" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.purchase.order.tree.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="doc_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="iso_document_tree_view_custom" model="ir.ui.view">
+        <field name="name">iso_document.tree.view.custom</field>
+        <field name="model">iso.document</field>
+        <field name="inherit_id" ref="iso_document_management.iso_document_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='model']" position="after">
+                <field name="doc_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <template id="report_purchasequotation_document_custom_icoso"
+              inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//t/t/t[2]" position="replace">
+            <div class="mt-0 pt-0 mb-5">
+                <div class="col-12">
+                    <table style="border: none;">
+                        <tr class="ml-0 pl-0">
+                            <td class="text-left ml-0  pl-0 mr-3 pr-3" style="border: none;">
+                                <b>Número:</b>
+                                <t t-esc="o.iso_process_num"/>
+                            </td>
+                            <td class="text-right mr-3 pr-3" style="border: none;">
+                                <b>Fecha de revisión:</b>
+                                <t t-esc="o.iso_document_date_revised"/>
+                            </td>
+                            <td class="text-right" style="border: none;">
+                                <b>Número de revisión:</b>
+                                <t t-esc="o.iso_document_revision"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-4">
+                    <h5 class="font-weight-bold">Dirección de entrega:</h5>
+                    <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
+                        <!--
+                        <span t-field="o.picking_type_id.warehouse_id.name"/>
+                        -->
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                             t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                    </div>
+                </div>
+                <div class="offset-3 col-4">
+                    <h5 class="font-weight-bold">Proveedor:</h5>
+                    <div t-field="o.partner_id"
+                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//h2" position="replace">
+            <h2 class="mt-5">
+                <span>Solicitud de cotización de </span>
+                <span t-field="o.doc_type"/>
+            </h2>
+            <h3 class="mb-5">
+                <span t-field="o.name"/>
+            </h3>
+        </xpath>
+    </template>
+
+    <template id="report_purchaseorder_document_custom_icoso"
+              inherit_id="iso_document_management.report_purchaseorder_document_custom">
+        <xpath expr="//div[1]" position="replace">
+        </xpath>
+    </template>
+
+    <template id="report_purchaseorder_document_custom" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t/t/t[1]" position="after">
+            <div class="mt-0 pt-0 mb-5">
+                <div class="col-12">
+                    <table style="border: none;">
+                        <tr class="ml-0 pl-0">
+                            <td class="text-left ml-0  pl-0 mr-3 pr-3" style="border: none;">
+                                <b>Número:</b>
+                                <t t-esc="o.iso_process_num"/>
+                            </td>
+                            <td class="text-right mr-3 pr-3" style="border: none;">
+                                <b>Fecha de revisión:</b>
+                                <t t-esc="o.iso_document_date_revised"/>
+                            </td>
+                            <td class="text-right" style="border: none;">
+                                <b>Número de revisión:</b>
+                                <t t-esc="o.iso_document_revision"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

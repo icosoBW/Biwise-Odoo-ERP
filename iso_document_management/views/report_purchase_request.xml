@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_purchase_request_custom" inherit_id="purchase_request.report_purchase_request">
+        <xpath expr="//div[hasclass('page')]/div[1]" position="after">
+            <div class="my-3"></div>
+        </xpath>
+        <xpath expr="//span[@t-field='o.name']" position="after">
+            <br/>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]//div[3]" position="replace">
+            <div class="row mt32 mb32">
+                <div class="col-auto">
+                    <b>Fecha de requisición:</b>
+                    <br/>
+                    <span t-field="o.date_start"/>
+                </div>
+                <div class="col-auto">
+                    <b>Doc. Relacionado:</b>
+                    <br/>
+                    <span t-field="o.origin"/>
+                </div>
+                <div class="col-auto">
+                    <b>Solicitado por:</b>
+                    <br/>
+                    <span t-field="o.requested_by"/>
+                </div>
+                <div class="col-auto">
+                    <b>Aprobador:</b>
+                    <br/>
+                    <span t-field="o.assigned_to"/>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-12">
+                    <div class="mb-2">Motivo de la requisición:</div>
+                    <div t-field="o.description"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//th[5]" position="replace">
+            <span></span>
+        </xpath>
+        <xpath expr="//th[5]" position="replace">
+            <th class="text-right">
+                <strong>Requerido para el:</strong>
+            </th>
+        </xpath>
+        <xpath expr="//td[4]" position="replace">
+            <span></span>
+        </xpath>
+        <xpath expr="//td[5]" position="replace">
+            <td style="max-width:150px">
+                <span t-field="line_ids.specifications"/>
+            </td>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_structure')][2]" position="inside">
+            <div class="container mt-5 mb32">
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <div class="border border-dark rounded m-auto" style="width:300px; height:100px"/>
+                        <p t-field="o.requested_by.name" class="mt-3 mb-0"/>
+                        <strong>Solicitante</strong>
+                    </div>
+                    <div class="col-auto">
+                        <t t-if="o.assigned_to.name">
+                            <div class="border border-dark rounded m-auto" style="width:300px; height:100px"/>
+                            <p t-field="o.assigned_to" class="mt-3 mb-0"/>
+                            <strong>Aprobador</strong>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

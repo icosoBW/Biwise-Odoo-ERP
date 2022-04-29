@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="iso_document_tree_view">
+      <field name="name">iso_document.tree.view</field>
+      <field name="model">iso.document</field>
+      <field name="arch" type="xml">
+        <tree editable="bottom">
+          <field name="process_num"/>
+          <field name="process"/>
+          <field name="sequence"/>
+          <field name="name"/>
+          <field name="code"/>
+          <field name="date_revised"/>
+          <field name="revision"/>
+          <field name="responsible"/>
+          <field name="document_url" widget ="url"/>
+          <field name="date_created" optional="hide"/>
+          <field name="created_by" optional="hide"/>
+          <field name="model" optional="hide"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record id="iso_document_action" model="ir.actions.act_window">
+      <field name="name">ISO Documents</field>
+      <field name="res_model">iso.document</field>
+      <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Registra las versiones de los documentos de la empresa,
+            según lo indica la norma ISO 9001.
+          </p>
+          <p>
+            Los documentos aquí registrados, se vincularán con los
+            reportes que se imprimen en pdf en los diferentes módulos
+            de Odoo.
+          </p>
+        </field>
+    </record>
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="iso_document.action_server">
+      <field name="name">ISO Document Server Action</field>
+      <field name="model_id" ref="model_iso_document"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model.iso.document,
+        }
+      </field>
+    </record>
+    -->
+    <!-- Top menu item -->
+    <menuitem name="Documentos ISO" id="iso_document_menu_root" web_icon="iso_document_management,static/description/icon.png"/>
+    <!-- menu categories -->
+    <menuitem name="Documentos" id="iso_document_documents" parent="iso_document_menu_root"/>
+    <!-- actions -->
+    <menuitem name="Lista de documentos" id="iso_document_menu" parent="iso_document_menu_root"
+              action="iso_document_action"/>
+    <!--
+    <menuitem name="Server to list" id="iso_document_management" parent="iso_document_management.menu_2"
+              action="iso_document_management.action_server"/>
+    -->
+  </data>
+</odoo>

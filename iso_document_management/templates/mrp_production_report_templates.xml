@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_mrporder_custom" inherit_id="mrp.report_mrporder">
+        <xpath expr="//div[hasclass('page')]" position="before">
+            <div class="row">
+                <div class="col-12">
+                    <table>
+                        <tr>
+                            <td class="text-left mx-3 px-3">Código: <t t-esc="o.iso_document_code"/></td>
+                            <td class="text-left mx-3 px-3">Fecha de revisión: <t t-esc="o.iso_document_date_revised"/></td>
+                            <td class="text-left mx-3 px-3">Revisión num.: <t t-esc="o.iso_document_revision"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('col-7')]" position="replace">
+            <div class="mb-3" style="color:#7e2115">
+                <h1>
+                  <t t-esc="o.iso_document_name"/>
+                </h1>
+                <h2>
+                    <span t-field="o.name"/>
+                </h2>
+            </div>
+        </xpath>
+    </template>
+</odoo>

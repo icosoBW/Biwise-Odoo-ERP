@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="external_layout_standard_custom" inherit_id="web.external_layout_standard">
+        <xpath expr="//t/div/div/div[2]" position="replace">
+            <div class="col-6" name="company_address">
+                <div t-field="company.partner_id"
+                     t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+            </div>
+        </xpath>
+        <xpath expr="//t/div[3]/div/div[2]" position="replace">
+            <div t-if="report_type == 'pdf'" class="text-muted">
+                Página:
+                <span class="page"/>
+                /
+                <span class="topage"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
